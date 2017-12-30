@@ -69,3 +69,12 @@ recently gave up to do this. Unfortunately, parts of the MIDI code in
 libjack actually created new objects, and I had to patch this behaviour. Using
 objects that have been allocated somewhere else and that will be deallocated
 somewhere else seems to be no big problem in a jack callback, though.
+
+
+How To Configure It?
+====================
+
+I'm going to create a tutorial here, which guides you how to use your favorite
+drum samples in connection with drums. If you just want to use the song-sketch
+util, you could use Ardour in order to link it against the General MIDI
+percussion kit.
