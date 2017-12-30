@@ -54,7 +54,7 @@ seems to work fine, though I get deprecation warnings for now.
 
 There is also a port of libjack available via dub, unfortunately there were
 some issues with it, so I
-had to hack it, and the software won't work with the official version.
+had to hack it, and *this software won't work with the official version of libjack*.
 
 
 Lessons Learned
