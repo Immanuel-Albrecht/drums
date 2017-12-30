@@ -50,8 +50,22 @@ Mileage May Vary
 In general, I made several not so good choices. First, I used dlangui,
 which is pre-1.0.0 software and therefore breaks rather often.
 The current version from github (dlangui 0.9.173+commit.8.g24d70c0e)
-seems to work fine, though.
+seems to work fine, though I get deprecation warnings for now.
 
 There is also a port of libjack available via dub, unfortunately there were
 some issues with it, so I
 had to hack it, and the software won't work with the official version.
+
+
+Lessons Learned
+===============
+
+One thing that I learned is that inside a jack thread, you cannot have most
+of the sugary features that D offers. Especially anything that might
+somehow trigger the garbage collection will kill your jack thread. A
+clean way would be to have the `@nogc`-flag for the callback function,
+but that would require some adjustments to the libjack port, but I
+recently gave up to do this. Unfortunately, parts of the MIDI code in
+libjack actually created new objects, and I had to patch this behaviour. Using
+objects that have been allocated somewhere else and that will be deallocated
+somewhere else seems to be no big problem in a jack callback, though.
