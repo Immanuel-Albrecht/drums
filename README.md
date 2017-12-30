@@ -44,7 +44,7 @@ Mileage May Vary
 
 In general, I made several not so good choices. First, I used dlangui,
 which is pre-1.0.0 software and therefore breaks rather often.
-The current version from github (dlangui 0.9.173+commit.8.g24d70c0e:)
+The current version from github (dlangui 0.9.173+commit.8.g24d70c0e)
 seems to work fine, though.
 
 There is also a port of libjack available via dub, unfortunately there were

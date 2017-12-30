@@ -1,0 +1,20 @@
+{
+	"name": "drums",
+	"description": "0x10-Version of the drums-backend in D.",
+
+
+    "targetType":"executable",
+	"copyright": "Copyright © 2016, Immo A.",
+	"authors": ["Immo A."],
+
+
+    "sourceFiles-windows": ["source/win_app.def"],
+    "libs-windows-x86_64": ["jack64"],
+
+
+	"dependencies": {
+        "jack": "~>1.0.1",
+	"dlangui": "~>0.9.2"
+
+	}
+}
