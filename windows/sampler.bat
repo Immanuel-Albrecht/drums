@@ -1,0 +1,3 @@
+cd "%~dp0"
+
+drums.exe rota-kit/cfg/china.cfg rota-kit/cfg/crash1.cfg rota-kit/cfg/crash2.cfg rota-kit/cfg/floor_hi.cfg rota-kit/cfg/floor_lo.cfg rota-kit/cfg/hihat_cls.cfg rota-kit/cfg/hihat_opn.cfg rota-kit/cfg/hihat_ped.cfg rota-kit/cfg/kick_a.cfg rota-kit/cfg/kick_b.cfg rota-kit/cfg/ride_bel.cfg rota-kit/cfg/ride1.cfg rota-kit/cfg/ride2.cfg rota-kit/cfg/snare_ord.cfg rota-kit/cfg/snare_prs.cfg rota-kit/cfg/snare_rms.cfg rota-kit/cfg/snare_sidestick.cfg rota-kit/cfg/splash.cfg rota-kit/cfg/tom_hi.cfg rota-kit/cfg/tom_lo.cfg rota-kit/cfg/tom_mid.cfg > drums.log

@@ -17,7 +17,7 @@ About
 
 The program *drums* is a proof of concept that you can write non-trivial audio
 applications in D, and that you can end up with software that runs on
-  - Windows via cygwin
+  - Windows
   - MacOSX
   - Debian Linux
 
@@ -70,11 +70,68 @@ libjack actually created new objects, and I had to patch this behaviour. Using
 objects that have been allocated somewhere else and that will be deallocated
 somewhere else seems to be no big problem in a jack callback, though.
 
+Windows
+=======
+
+Both programs run on Windows. I am aware that the typical Windows user
+never compiles her_his software him_herself. Therefore I provided some
+binaries without any warranty (the question is: do you trust a random Linux
+  user
+  to be able to keep his Windows free of malware?)
+Furthermore, the Windows user would have to edit the `sampler.bat` file
+in order to reflect his_her configuration files.
+
 
 How To Configure It?
 ====================
 
-I'm going to create a tutorial here, which guides you how to use your favorite
-drum samples in connection with drums. If you just want to use the song-sketch
+If you just want to use the song-sketch
 util, you could use Ardour in order to link it against the General MIDI
-percussion kit.
+percussion kit. But since this is only half of the deal,
+I'm going to create a tutorial here, which guides you how to use your favorite
+drum samples in connection with drums. Unfortunately, I cannot provide you
+with free samples, and I also do not know of any free drum sample library
+that is worth the hassle of going through the configuration process.
+There used to be a pretty decent free to use sample library called
+`ns_kit7free`, but the
+original author sold it and it is no longer available for free download.
+Even more unfortunate for you is the fact that the DVD version that could be
+bought for about 80 GBP is also no longer available, and the follow-up website
+marketing it as a paid download seems to be defunct, too. On the other hand,
+you can use any sample library there is, as long as you can export the samples
+to 32bit big-endian raw 2-channel sample files (or k-channels if you
+  bother to edit the corresponding source file *immutables*).
+
+Setup Walk-Through
+==================
+
+Step 0
+------
+
+You should get hold of `python`, `bash`, and `sox`, somehow.
+On debian, you would use `apt-get` for it, on mac `brew`, and on Windows
+you probably should use the cygwin installer tool.
+
+Step 1
+------
+
+You should create a directory for every drum that you wish to sample,
+and copy the corresponding sample files (`.wav`s, for instance)
+in that folder, such that the samples that correspond to weak hits
+have filenames that are ''smaller'' than the stronger hits. I have
+never seen a sample library, where you would have to rename the files
+in order to achieve this. It goes without saying that you need at least one
+sample per drum for this to work.
+
+Step 1b (optional)
+------------------
+
+I consider 10 samples per drum to be enough for my purposes, and since
+I have been lazy and copied whole directories, I have to
+weed out some samples. In order to do that, I run `./up_to_ten_samples.py`
+to generate a `keep.m3u`. Then I check whether those samples make sense
+by listening to all of them. If I am happy, I delete all files from
+`remove.m3u` by hacking
+```bash
+ for i in `cat remove.m3u`; do rm "$i"; done
+ ```
