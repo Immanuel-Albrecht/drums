@@ -135,3 +135,101 @@ by listening to all of them. If I am happy, I delete all files from
 ```bash
  for i in `cat remove.m3u`; do rm "$i"; done
  ```
+Probably I do not like how the files are named, so I rename them
+with `./rename_files.py`.
+
+Step 2
+------
+
+Now we have to convert the audio files to the simplest possible
+way to store them: 32bit singed big-endian integer frames consisting
+of the two stereo channel samples. If your sample library is like mine,
+you would also want to chop off the silence at the beginning of the samples.
+I create the bash script for that as follows
+```bash
+echo '!#/bin/bash' > convert_and_trim.sh
+chmod +x convert_and_trim.sh
+for i in **/*wav; do
+  echo sox "$i" -t sl --encoding signed-integer --bits 32 --endian big "${i%wav}sl" silence 20s 0s -76d trim 0s
+done  
+```
+
+Clearly, this script does not work if you don't have *glob* on, or
+if you used spaces anywhere (don't!). The second *0s* after trim can be
+used to further tweak the trimming if needed.
+Now, we just run `./convert_and_trim.sh`.
+
+Step 3
+------
+
+Now, you should edit the `cfg` variable in `create_config.py`
+to reflect the directory names and drums that you have. You can group
+drums with `#drum` and cymbals with `#cymb`. Each tag creates a new
+mute group, and should be followed by the directory names of the
+drums that belong to that group, followed by the assigned midi note
+number of that drum. If you run `./create_config.py` the configuration
+files for the drums are created for you; and they will work as long as
+your files are in a sub-directory called `rota-kit` (you might want to
+  change that in the scripts, though) and as long as you start
+  the sampler like this:
+```bash
+dub -- rota-kit/cfg/*
+```
+or
+```bash
+./drums rota-kit/cfg/*
+```
+or by editing the `sampler.bat`.
+
+Step 4
+------
+You probably want to edit `drumkit.d` and `sketchui.d` to reflect
+your drum kit configuration.
+
+Drum Configuration Files
+========================
+
+*drums* uses a single configuration file per drum which is added to
+the command line in order to load it.
+Basically, that file consists of directives from this list:
+
+NAME $name
+     __ sets the name of this drum
+DRUM $pitch
+     __ sets the MIDI pitch where the drum listens to hits
+TIME $pitch
+     __ sets the MIDI pitch where the drum listens to timing-accuracy hints
+VELOCITY $pitch
+     __ sets the MIDI pitch where the drum listens to velocity-accuracy hints
+DAMP $pitch
+     __ adds a MIDI pitch where the drum listens to hits in order to damp itself
+SET AUTODAMP
+    __ damp previous hits on next hit
+UNSET AUTODAMP
+    __ do not damp previous hits on next hit
+SET USERDAMP
+     __ respond to damp-hits on drum pitch (damp on note-off event)
+UNSET USERDAMP
+     __ do not respond to damp-hits on drum pitch
+BALANCE $dB
+     __ left-right balance, left channel is enhanced by -$dB,
+                           right channel is enhanced by +$dB.
+GAIN $dB
+     __ trim gain
+DELAY $frames
+     __ set the delay for the drum (default: 96 frames)
+AUTO DAMP DELAY $frames
+     __ set the additional delay for damping on another drum hit
+USER DAMP DELAY $frames
+     __ set the additional delay for damping requests by the user (other mute group drum hits)
+DRUM $pitch DAMP DELAY $frames
+     __ set the additional delay for damping when the drum $pitch is hit.
+TIME VARIANCE $frames
+     __ set the variance for the default timing-accuracy (default: 100 frames)
+VELOCITY VARIANCE $dB
+     __ set the variance for the default velocity-accuracy (default: 2 dB)
+ADJUST $frames
+     __ add $frame zero frames to the front of the last loaded sample, or
+        if $frame < 0, remove $frames from the front of the last loaded sample
+RAW $sl_file_name
+     __ load the given raw sample file
