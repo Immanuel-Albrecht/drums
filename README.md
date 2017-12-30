@@ -33,11 +33,16 @@ What does *synthesize* do?
 Synthesize is similar to a modular tracker or sequencer,
 you can compose and cobble together different drum patterns
 which on playback will generate MIDI events that drive the sampler.
+You can customize the MIDI note mapping in the file *drumkit.d*.
 There are two modes, one for hackers, and one called *./sketch.sh*
-with a more decent GUI -- use this one.
-A nice feature here is the rehearsal mode that allows you to display
-your guitar tabs in a riff-wise fashion; so you don't have to manually
+with a more decent GUI -- use this one uses the MIDI note mapping from
+*drumkit.d* and the defaults from *sketchui.d*.
+ A nice feature here is the rehearsal mode that allows
+you to display
+your guitar tabs (or any other image)
+in a riff-wise fashion; so you don't have to manually
 switch pages anymore.
+
 
 Mileage May Vary
 ================
