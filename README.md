@@ -192,7 +192,7 @@ Drum Configuration Files
 *drums* uses a single configuration file per drum which is added to
 the command line in order to load it.
 Basically, that file consists of directives from this list:
-
+```
 NAME $name
      __ sets the name of this drum
 DRUM $pitch
@@ -233,3 +233,4 @@ ADJUST $frames
         if $frame < 0, remove $frames from the front of the last loaded sample
 RAW $sl_file_name
      __ load the given raw sample file
+```
