@@ -38,3 +38,15 @@ with a more decent GUI -- use this one.
 A nice feature here is the rehearsal mode that allows you to display
 your guitar tabs in a riff-wise fashion; so you don't have to manually
 switch pages anymore.
+
+Mileage May Vary
+================
+
+In general, I made several not so good choices. First, I used dlangui,
+which is pre-1.0.0 software and therefore breaks rather often.
+The current version from github (dlangui 0.9.173+commit.8.g24d70c0e:)
+seems to work fine, though.
+
+There is also a port of libjack available via dub, unfortunately there were
+some issues with it, so I
+had to hack it, and the software won't work with the official version.
