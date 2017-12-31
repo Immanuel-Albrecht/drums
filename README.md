@@ -2,6 +2,11 @@
 A jack-audio X-platform drum sampler hacked together in D
 
 - Demo on Debian  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [![Demo-Screenrecording (YouTube)](https://img.youtube.com/vi/VupHdei7npA/0.jpg)](https://www.youtube.com/watch?v=VupHdei7npA)
+ 
+- Demo on MacOS X  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [![Demo-Screenrecording (YouTube)](https://img.youtube.com/vi/cv1dRJ353FQ/0.jpg)](https://www.youtube.com/watch?v=cv1dRJ353FQ)
+
+- Demo on Windows  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [![Demo-Screenrecording (YouTube)](https://img.youtube.com/vi/VrQqJUIBwUM/0.jpg)](https://www.youtube.com/watch?v=VrQqJUIBwUM)
+
 
 Quality Disclaimer
 ==================
