@@ -56,9 +56,9 @@ immutable pat_default_rows = [
     "hihat_opn",
     "ride1", "splash", "crash1", "crash2","china","floor_lo","floor_hi","tom_mid","tom_hi"
 ]; //<! default row assingments
-immutable pat_default_name = "New Pattern";
+immutable pat_default_name = "Unnamed Pattern";
 
-immutable seq_default_name = "New Sequence";
+immutable seq_default_name = "Unnamed Sequence";
 
 immutable default_hit_strength = 100;
 immutable default_row_drum = "*unassigned*";
@@ -330,7 +330,7 @@ public:
             btn_load.click = delegate(Widget w) {
 
                 auto dlg = new FileDialog(
-                    UIString("Load Workspace..."d), window,
+                    UIString.fromRaw("Load Workspace..."d), window,
                     null, FileDialogFlag.Open | FileDialogFlag.FileMustExist);
                 dlg.addFilter(
                     FileFilterEntry(UIString("FILTER_WKS_FILES",
@@ -395,7 +395,7 @@ public:
             btn_saveas.text = "Save Workspace As..."d;
             btn_saveas.click = delegate(Widget w) {
                 auto dlg = new FileDialog(
-                    UIString("Save Workspace As..."d), window,
+                    UIString.fromRaw("Save Workspace As..."d), window,
                     null, FileDialogFlag.Save | FileDialogFlag.ConfirmOverwrite);
                 dlg.addFilter(
                     FileFilterEntry(UIString("FILTER_WKS_FILES",
@@ -480,7 +480,7 @@ public:
 
                 if (workspace.path == "") {
                     auto dlg = new FileDialog(
-                        UIString("Save Workspace As..."d), window,
+                        UIString.fromRaw("Save Workspace As..."d), window,
                         null, FileDialogFlag.Save | FileDialogFlag.ConfirmOverwrite);
                     dlg.addFilter(
                         FileFilterEntry(UIString("FILTER_WKS_FILES",
@@ -515,7 +515,7 @@ public:
                     updateWorkspace();
                 }
 
-            
+
 
 
 
@@ -580,7 +580,7 @@ public:
 
             sq_list = new StringListWidget;
             sq_list.itemClick = delegate(Widget src, int itemIdx) {
-            
+
                 if ((itemIdx >= 0) && (itemIdx < workspace.sequences.length)) {
                     ui.seq.attachSequence(workspace.sequences[itemIdx]);
                     ui.main.selectTab(ui.defID~"SONGEDITOR");
@@ -598,7 +598,7 @@ public:
             p_list = new StringListWidget;
 
             p_list.itemClick = delegate(Widget src, int itemIdx) {
-            
+
                 if ((itemIdx >= 0) && (itemIdx < workspace.patterns.length)) {
                     ui.pat.attachPattern(workspace.patterns[itemIdx]);
                     ui.main.selectTab(ui.defID~"PATTERNEDITOR");
@@ -693,7 +693,7 @@ public:
                 workspace.patterns[pat_id].constructProgram(cons, preview_bpm, seq_id,
                         row, pat_id, preview_percentage, subseq_id ,subseq_row, subpercentage);
 
-                
+
                 foreach ( r; [rehearse,rehearse2]) {
                     r.percentage = preview_percentage;
                     r.subpercentage = subpercentage;
@@ -742,7 +742,7 @@ source/seqed.d-        int subseq, int superpercentage) const {*/
                                 workspace.sequences[slot.id].constructProgram(cons, percentage,
                                     seq_id, row, workspace, seq_recursion_depth-1,
                                     slot.id, preview_percentage);
-                
+
                 foreach ( r; [rehearse,rehearse2]) {
                     r.percentage = preview_percentage;
                     r.subpercentage = percentage;
@@ -772,7 +772,7 @@ source/seqed.d-        int subseq, int superpercentage) const {*/
                                 workspace.sequences[seq_id].constructProgram(cons, preview_percentage,
                                     seq_id, -1, workspace, seq_recursion_depth,
                                     -1, preview_percentage);
-                
+
                 foreach ( r; [rehearse,rehearse2]) {
                     r.percentage = preview_percentage;
                     r.subpercentage = 100;
@@ -785,9 +785,9 @@ source/seqed.d-        int subseq, int superpercentage) const {*/
     void toggleRehearserTabWindow() {
         if (rehearse_in_tab) {
             rehearse_in_tab = false;
-            
+
             rehearse_window.show();
-            
+
         } else {
 
             /** window.hide() would be a nice feature... */
@@ -838,7 +838,7 @@ source/seqed.d-        int subseq, int superpercentage) const {*/
                     delegate(const(Action) a) {
                         if (a.id == StandardAction.Ok)
                             window.close();
-                        
+
                         return true;
                     });
 
@@ -1036,7 +1036,7 @@ public:
                 if (workspace.sequences[status.subsequence_id] is seq.seq) {
                     seq.setPlayhead(status.pattern_in_subsequence);
                     dont_clear = true;
-                } 
+                }
             }
 
             if ((status.sequence_id >= 0)

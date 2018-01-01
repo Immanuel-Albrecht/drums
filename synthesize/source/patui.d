@@ -151,8 +151,8 @@ struct PatternEditorVars {
                 denominator_btn_down = false;
 
                 auto dlg = new InputBox(
-                    UIString("Set Pattern Denominator..."d),
-                    UIString("Set columns per beat to:"d),
+                    UIString.fromRaw("Set Pattern Denominator..."d),
+                    UIString.fromRaw("Set columns per beat to:"d),
                     window, to!dstring(pat.denominator),
                     delegate(dstring result) {
                     try {
@@ -160,8 +160,8 @@ struct PatternEditorVars {
                             32);
                         if (result_denominator != pat.denominator) {
                             window.showMessageBox(
-                                UIString("Change Pattern Denominator..."d),
-                                UIString("Interpolate current columns?"d),
+                                UIString.fromRaw("Change Pattern Denominator..."d),
+                                UIString.fromRaw("Interpolate current columns?"d),
                                 [ACTION_YES, ACTION_NO], 1,
                                 delegate(const Action a) {
 
@@ -321,8 +321,8 @@ struct PatternEditorVars {
                 columns_btn_down = false;
 
                 auto dlg = new InputBox(
-                    UIString("Set Pattern Length..."d),
-                    UIString("Change number of pattern columns to:"d),
+                    UIString.fromRaw("Set Pattern Length..."d),
+                    UIString.fromRaw("Change number of pattern columns to:"d),
                     window, to!dstring(pat.cols), delegate(dstring result) {
                     try {
                         auto result_cols = min(max(0, to!int(result)),
@@ -910,8 +910,8 @@ struct PatternEditorVars {
         auto chg_name = new Button;
         chg_name.text = "Rename..."d;
         chg_name.click = delegate(Widget src) {
-            auto dlg = new InputBox(UIString("Rename Pattern..."d),
-                UIString("Change pattern name to:"d), window,
+            auto dlg = new InputBox(UIString.fromRaw("Rename Pattern..."d),
+                UIString.fromRaw("Change pattern name to:"d), window,
                 to!dstring(pat.name), delegate(dstring result) {
                 pat.name = to!string(result);
                 updateWorkspace();

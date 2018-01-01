@@ -29,6 +29,8 @@ import std.concurrency;
 import jack.c.jack;
 import jack.c.midiport;
 
+import std.algorithm;
+
 //debug = jack_callback;
 
 struct PipeMessage {
@@ -421,18 +423,18 @@ class JackCallbackRoutines {
                     }
                      else if (msg.type == MessageType.PausePlayback) {
                         pause_playback = true;
-                    } 
+                    }
                      else if (msg.type == MessageType.ResumePlayback) {
                         pause_playback = false;
-                    } 
+                    }
                      else if (msg.type == MessageType.SpeedFactorSlower) {
                         speed_factor = min((105*speed_factor)/100,max_factor);
                         status.speed_factor =( speed_factor_denominator*100) / speed_factor;
-                    } 
+                    }
                      else if (msg.type == MessageType.SpeedFactorFaster) {
                         speed_factor = max(min_factor,(100*speed_factor)/105);
                         status.speed_factor =( speed_factor_denominator*100) / speed_factor;
-                    } 
+                    }
 
                     to_jack.free(msg);
 
@@ -534,15 +536,15 @@ class JackCallbackRoutines {
                         break;
                     case ProgramAction.SetSequencePercent:
                         status.percentage = prg.seqPercents[seqPer];
-                        ++seqPer;                        
+                        ++seqPer;
                         break;
                     case ProgramAction.SetSubSeqId:
                         status.subsequence_id = prg.subSeqIds[subId];
-                        ++subId;                        
+                        ++subId;
                         break;
                     case ProgramAction.SetSubSeqPercent:
                         status.subsequence_percentage = prg.subSeqPercents[subPer];
-                        ++subPer;                        
+                        ++subPer;
                         break;
 
                     case ProgramAction.PostFeedback:

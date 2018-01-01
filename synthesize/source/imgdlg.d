@@ -35,7 +35,7 @@ class ImageDialog : Dialog {
     void delegate() okay;
 
     this(Window parent) {
-        super(UIString("Choose Image Reference..."d), parent, DialogFlag.Modal| DialogFlag.Resizable);
+        super(UIString.fromRaw("Choose Image Reference..."d), parent, DialogFlag.Modal| DialogFlag.Resizable);
         okay = delegate void() {
             return;
         };
@@ -49,9 +49,14 @@ class ImageDialog : Dialog {
             }
         }
 
+    override void onShow() {
+      // fix display glitch
+      window.onResize(window.width+1, window.height);
+    }
+
     override void initialize() {
         minWidth(600).minHeight(400);
-        
+
         VerticalLayout lines = new VerticalLayout();
 
         lines.layoutHeight = FILL_PARENT;
@@ -73,7 +78,7 @@ class ImageDialog : Dialog {
             update_preview();
 
             canvas.invalidate();
-    
+
 
             return false;
         };
@@ -83,9 +88,9 @@ class ImageDialog : Dialog {
 
         auto chooser = new Button(null,"..."d);
         chooser.click = delegate(Widget w) {
-        
+
                 auto dlg = new FileDialog(
-                    UIString("Select image file..."d), window,
+                    UIString.fromRaw("Select image file..."d), window,
                     null, FileDialogFlag.Open | FileDialogFlag.FileMustExist);
                 dlg.addFilter(
                     FileFilterEntry(UIString("FILTER_JPG_FILES",
@@ -97,7 +102,7 @@ class ImageDialog : Dialog {
                     FileFilterEntry(UIString("FILTER_ALL_FILES",
                     "All files (*)"d), "*"));
 
-                
+
                 dlg.dialogResult = delegate(Dialog _dlg, const Action result) {
                     if (result.id == ACTION_OPEN.id) {
                         string filepath = relativePath(result.stringParam);
@@ -146,7 +151,7 @@ class ImageDialog : Dialog {
 	            buf.drawRescaled(dst_rect,display_image,src_rect);
             }
 	    };
-        
+
         lines.addChild(canvas);
 
         update_preview();
@@ -156,7 +161,7 @@ class ImageDialog : Dialog {
 
 
         btns.addChild(new TextWidget(null, " "d).layoutWidth(FILL_PARENT));
-        
+
         auto cancel = new Button(null, "Cancel"d);
         cancel.click = delegate(Widget w) {
 
@@ -166,10 +171,10 @@ class ImageDialog : Dialog {
         };
 
         btns.addChild(cancel);
-        
+
         auto ok = new Button(null, "Okay"d);
         ok.click = delegate(Widget w) {
-            
+
             img_path = to!string(data.text);
 
             this.close(null);
@@ -187,6 +192,7 @@ class ImageDialog : Dialog {
         lines.addChild(btns);
 
         addChild(lines);
-      
+
+        writeln("... Done initializing.");
     }
 };

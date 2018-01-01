@@ -667,7 +667,7 @@ int syn_main(string[] args) {
     CheckBox[] bool_uis;
     foreach (s; sync_bool) {
         auto cb = new CheckBox;
-        cb.text = to!UIString(to!dstring(s.name));
+        cb.text = UIString.fromRaw(to!dstring(s.name));
         cb.checkChange = (sync => delegate(Widget w, bool s) {
             if (m_sync.tryLock) {
                 scope (exit)

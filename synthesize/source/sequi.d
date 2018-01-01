@@ -291,8 +291,8 @@ struct SequenceEditorVars {
         auto chg_name = new Button;
         chg_name.text = "Rename..."d;
         chg_name.click = delegate(Widget src) {
-            auto dlg = new InputBox(UIString("Rename Sequence..."d),
-                UIString("Change sequence name to:"d), window,
+            auto dlg = new InputBox(UIString.fromRaw("Rename Sequence..."d),
+                UIString.fromRaw("Change sequence name to:"d), window,
                 to!dstring(seq.name), delegate(dstring result) {
                 seq.name = to!string(result);
                 updateWorkspace();
@@ -618,7 +618,7 @@ struct SequenceEditorVars {
 
 
                     dlg.okay = delegate() {
-                    
+
                         if (seq.list[nbr].rehearsal_image == dlg.img_path)
                             return;
 
@@ -673,7 +673,7 @@ struct SequenceEditorVars {
 
                     dlg.link = seq.list[nbr].info_link;
                     dlg.okay = delegate() {
-                    
+
                         if (seq.list[nbr].info_link == dlg.link)
                             return;
 
@@ -711,7 +711,7 @@ struct SequenceEditorVars {
 
             auto btn_see = new Button(null, "See"d);
             btn_see.click = (nbr => delegate(Widget src) {
-    
+
                     auto slot = seq.list[nbr];
 
                     if (slot.filled) {
@@ -734,7 +734,7 @@ struct SequenceEditorVars {
                         if (slot.references_pattern) {
                             /** loop pattern */
                             if ((slot.id >= 0)&&(slot.id < workspace.patterns.length)) {
-                                    
+
                                     int seq_idx = -1;
                                     foreach (idx, s;
                                     workspace.sequences) {
@@ -767,7 +767,7 @@ struct SequenceEditorVars {
 
                         }
                     }
-                    
+
                     return true;
                 })(idx);
 
@@ -863,15 +863,18 @@ struct SequenceEditorVars {
             rows ~= row;
         }
 
-        auto seqscr = new ScrollWidget("scrlseq");
-        seqscr.contentWidget = rowlayout;
+        //auto seqscr = new ScrollWidget("scrlseq");
 
-        seqscr.vscrollbar.minWidth = cast(int)(20 * retina_factor);
-        seqscr.vscrollbar.maxWidth = cast(int)(20 * retina_factor);
-        seqscr.hscrollbar.minHeight = cast(int)(20 * retina_factor);
-        seqscr.hscrollbar.maxHeight = cast(int)(20 * retina_factor);
+        //seqscr.maxHeight = SIZE_UNSPECIFIED;
 
-        master.addChild(seqscr);
+        //seqscr.vscrollbar.minWidth = cast(int)(20 * retina_factor);
+        //seqscr.vscrollbar.maxWidth = cast(int)(20 * retina_factor);
+        //seqscr.hscrollbar.minHeight = cast(int)(20 * retina_factor);
+        //seqscr.hscrollbar.maxHeight = cast(int)(20 * retina_factor);
+
+        //master.addChild(seqscr);
+        master.addChild(rowlayout);
+
 
         updateWorkspace();
 

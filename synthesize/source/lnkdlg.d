@@ -33,7 +33,7 @@ class LinkDialog : Dialog {
     void delegate() okay;
 
     this(Window parent) {
-        super(UIString("Choose External Link..."d), parent, DialogFlag.Modal| DialogFlag.Resizable,
+        super(UIString.fromRaw("Choose External Link..."d), parent, DialogFlag.Modal| DialogFlag.Resizable,
                 600,80);
         okay = delegate void() {
             return;
@@ -42,7 +42,7 @@ class LinkDialog : Dialog {
 
 
     override void initialize() {
-        
+
         VerticalLayout lines = new VerticalLayout();
 
         lines.layoutWidth = FILL_PARENT;
@@ -60,9 +60,9 @@ class LinkDialog : Dialog {
 
         auto chooser = new Button(null,"..."d);
         chooser.click = delegate(Widget w) {
-        
+
                 auto dlg = new FileDialog(
-                    UIString("Select target file..."d), window,
+                    UIString.fromRaw("Select target file..."d), window,
                     null, FileDialogFlag.Open | FileDialogFlag.FileMustExist);
                 dlg.addFilter(
                     FileFilterEntry(UIString("FILTER_ALL_FILES",
@@ -74,7 +74,7 @@ class LinkDialog : Dialog {
                     FileFilterEntry(UIString("FILTER_WAV_FILES",
                     "*.wav"d), "*.wav"));
 
-                
+
                 dlg.dialogResult = delegate(Dialog _dlg, const Action result) {
                     if (result.id == ACTION_OPEN.id) {
                         string filepath = relativePath(result.stringParam);
@@ -101,7 +101,7 @@ class LinkDialog : Dialog {
         auto preview = new Button(null,"Open link target..."d);
         preview.click = delegate(Widget w) {
             link = to!string(data.text);
-        
+
             platform.openURL(link);
 
             return true;
@@ -111,7 +111,7 @@ class LinkDialog : Dialog {
 
 
         btns.addChild(new TextWidget(null, " "d).layoutWidth(FILL_PARENT));
-        
+
         auto cancel = new Button(null, "Cancel"d);
         cancel.click = delegate(Widget w) {
 
@@ -121,10 +121,10 @@ class LinkDialog : Dialog {
         };
 
         btns.addChild(cancel);
-        
+
         auto ok = new Button(null, "Okay"d);
         ok.click = delegate(Widget w) {
-            
+
             link = to!string(data.text);
 
             this.close(null);
@@ -142,6 +142,6 @@ class LinkDialog : Dialog {
         lines.addChild(btns);
 
         addChild(lines);
-      
+
     }
 };
