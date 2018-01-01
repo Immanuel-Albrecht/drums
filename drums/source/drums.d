@@ -57,7 +57,7 @@ pure float hard_limit(float f) @safe @nogc  {
 
 /*
  Usage: drums [--name=JACK_CLIENT_NAME] drum1.cfg [drum2.cfg [..]]
- 
+
  where drum*.cfg are configuration files for each drum
 
  */
@@ -181,13 +181,13 @@ int drums_main(string[] args) {
                 }
 
                 midibuf = midi.get_midi_buffer(nframes);
-                
+
                 iter_events = midibuf.iter_events();
-                while (!iter_events.empty()) 
+                while (!iter_events.empty())
                 {
                     event = iter_events.front();
                     iter_events.popFront();
-                    
+
                     if (event.size == 3) {
                         if (event.buffer[0] == 0x80
                                 || event.buffer[0] == 0x90 && event.buffer[2] == 0) {
@@ -304,11 +304,8 @@ int drums_main(string[] args) {
         layout.addChild(line);
     }
 
-    auto scroll = new ScrollWidget;
-    scroll.contentWidget = layout;
-
     auto vm = new myVerticalLayout;
-    vm.addChild(scroll);
+    vm.addChild(layout);
 
     auto status = new HorizontalLayout;
 
@@ -363,6 +360,7 @@ int drums_main(string[] args) {
     status.addChild(vel);
     status.addChild(plus1);
     status.addChild(plus10);
+
 
     vm.addChild(status);
 
